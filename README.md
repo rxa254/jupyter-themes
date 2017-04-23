@@ -32,7 +32,8 @@ jt -t onedork -ff serif -tcff serif
 ```sh
 pip install jupyterthemes
 ```
-
+or
+'''sudo python setup.py install'''
 
 
 ## How to use
