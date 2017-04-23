@@ -1,10 +1,6 @@
 /**************************************************************
   CodeMirror syntax highlighting for Code, Txt, & MD Cells
 **************************************************************/
-
-/***************************************/
-/******* CODEMIRROR FONT & LINES *******/
-/***************************************/
 div.CodeMirror,
 div.CodeMirror pre {
     font-family: @monofont, monospace;
@@ -16,6 +12,7 @@ div.CodeMirror-lines {
     padding-bottom: .6em;
     padding-left: .5em;
     padding-right: 1.5em;
+    padding-top: 4px;
 }
 /*********************************/
 /********** ANSI COLORS **********/
@@ -58,7 +55,11 @@ div.js-error {
 /******** TOOLTIP DIMENSIONS ********/
 /************************************/
 .ipython_tooltip {
-    border: 2px solid @selected-bg;
+    font-family: @monofont, monospace;
+    font-size: @monofontsize;
+    line-height: @cc-line-height;
+    border: 2px solid darken(@tooltip-bg-color, 8%);
+    background: @tooltip-bg-color;
     background-color: @tooltip-bg-color;
     border-radius: 2px;
     overflow-x: visible;
@@ -66,16 +67,17 @@ div.js-error {
     box-shadow: none;
     position: absolute;
     z-index: 1000;
-    font-size: 90%;
 }
 .ipython_tooltip .tooltiptext pre {
+    font-family: @monofont, monospace;
+    font-size: @monofontsize;
+    line-height: @cc-line-height;
+    background: @tooltip-bg-color;
     background-color: @tooltip-bg-color;
     color: @cc-input-fg;
-    line-height: 130%;
     overflow-x: visible;
     overflow-y: visible;
-    max-width: 800px;
-    font-size: 90%;
+    max-width: 900px;
 }
 div#tooltip.ipython_tooltip {
     overflow-x: wrap;
@@ -84,10 +86,31 @@ div#tooltip.ipython_tooltip {
 }
 div.tooltiptext.bigtooltip {
     overflow-x: visible;
-    overflow-y: visible;
+    overflow-y: scroll;
     height: 400px;
     max-width: 800px;
 }
+// div#pager {
+//     background-color: @notebook-bg;
+//     -webkit-box-shadow: none;
+//     box-shadow: none;
+//     z-index: 100;
+//     top: auto !important;
+// }
+// div#pager pre {
+//     color: @cc-input-fg;
+//     background-color: @cc-input-bg;
+//     line-height: @cc-line-height;
+//     padding: 0.4em;
+//     border-color: transparent;
+// }
+// div#pager .ui-resizable-handle {
+//     top: 0px;
+//     height: 8px;
+//     background: @scrollbar;
+//     border-top: 1px solid darken(@scrollbar, 2%);
+//     border-bottom: 1px solid darken(@scrollbar, 2%);
+// }
 
 /*******************************************/
 /****** CODE CELLS SYNTAX HIGHLIGHTING *****/
@@ -98,6 +121,8 @@ div.tooltiptext.bigtooltip {
     background: @cc-input-bg;
     color: @cc-input-fg;
     border-radius: 2px;
+    font-style: normal;
+    font-weight: normal;
 }
 .cm-s-ipython div.CodeMirror-selected {
     background: @cm-selected;
@@ -110,8 +135,26 @@ div.tooltiptext.bigtooltip {
 .cm-s-ipython .CodeMirror-linenumber {
     color: @cm-linenumber;
 }
+.CodeMirror-sizer {
+    margin-left: 40px;
+}
+.CodeMirror-gutter,
+.CodeMirror-gutters,
+.CodeMirror-linenumber {
+    background: @cm-gutters;
+    background-color: @cm-gutters;
+    border-color: @cm-gutters;
+    padding-right: 4px;
+}
+.CodeMirror-gutter.CodeMirror-linenumbers,
+div.CodeMirror-gutter.CodeMirror-linenumbers {
+    width: 34px;
+}
+.CodeMirror-linenumber {
+    color: @cm-linenumber;
+}
 .cm-s-ipython .CodeMirror-cursor {
-    border-left: 2px solid @cm-cursor;
+    border-left: @cursor-info !important;
 }
 .cm-s-ipython span.cm-comment {
     color: @cm-comment;
@@ -124,10 +167,10 @@ div.tooltiptext.bigtooltip {
     color: @cm-number;
 }
 .cm-s-ipython span.cm-property {
-    color: @cm-property;
+    color: @cm-variable;
 }
 .cm-s-ipython span.cm-attribute {
-    color: @cm-attribute;
+    color: @cm-variable;
 }
 .cm-s-ipython span.cm-keyword {
     color: @cm-keyword;
@@ -173,6 +216,9 @@ div.tooltiptext.bigtooltip {
 .cm-s-ipython span.cm-entity {
     color: @cm-entity;
 }
+.cm-s-ipython span.cm-quote {
+    color: @cm-string;
+}
 div.CodeMirror span.CodeMirror-matchingbracket {
     color: @selected-fg-bright;
     background-color: @matching-bracket;
@@ -185,9 +231,27 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 /***********************************************/
 /**** TXT, HEADER, & MD SYNTAX HIGHLIGHTING ****/
 /***********************************************/
-div.cell.text_cell .cm-s-default .cm-header {
-    color: @unrendered-text;
+.cm-header-1 {
+    font-size: 220%;
 }
+.cm-header-2 {
+    font-size: 170%;
+}
+.cm-header-3 {
+    font-size: 150%;
+}
+.cm-header-4 {
+    font-size: 120%;
+}
+.cm-header-5 {
+    font-size: 100%;
+}
+div.cell.text_cell .cm-s-default .cm-header {
+    font-family: @notebook-fontfamily;
+    font-weight: normal;
+    color: @header-fg;
+}
+
 div.cell.text_cell .cm-s-default span.cm-variable-2 {
     color: @text-cell-fg;
 }
@@ -216,7 +280,7 @@ div.cell.text_cell .cm-s-default span.cm-variable-3 {
     color: @cm-atom;
 }
 .CodeMirror-cursor {
-    border-left: 2px solid @cm-cursor;
+    border-left: @cursor-info !important;
     border-right: none;
     width: 0;
 }
@@ -225,24 +289,4 @@ div.cell.text_cell .cm-s-default span.cm-variable-3 {
 }
 .cm-s-default .cm-selected {
     background: @cm-selected;
-}
-div.text_cell_render h1 {
-    font-family: @notebook-fontfamily;
-    text-align: center;
-    font-weight: lighter;
-    background: @text-cell-bg;
-    background-color: @text-cell-bg;
-    color: @header-fg;
-}
-div.text_cell_render h2,
-div.text_cell_render h3,
-div.text_cell_render h4,
-div.text_cell_render h5,
-div.text_cell_render h6 {
-    font-family: @notebook-fontfamily;
-    text-align: left;
-    font-weight: lighter;
-    background: @text-cell-bg;
-    background-color: @text-cell-bg;
-    color: @header-fg;
 }
