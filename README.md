@@ -51,6 +51,10 @@ pip install --upgrade jupyterthemes
 - **slow render when scrolling:** fix available [here](https://github.com/dunovank/jupyter-themes/issues/117#issuecomment-296391443)
 - **for best results:** use notebook>=5.0 (`pip install --upgrade notebook`)
 
+or
+'''sudo python setup.py install'''
+
+
 
 ### Command Line Usage
 ```
